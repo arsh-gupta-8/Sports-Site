@@ -3,16 +3,21 @@ import express from 'express';
 const app = express();
 const PORT = 3000;
 
-let data = {
-    name: 'Arsh',
-    age: 18
-}
+app.use(express.json())
+
+let data = ['Arsh']
 
 // WEBSITE ENDPOINTS
 
 app.get('/', (req, res) => {
     console.log('Reached an endpoint', req.method)
-    res.send('<h1>Home Page</h1>')
+    res.send(`
+        <body 
+        style="background:yellow;
+        color: green;">
+            <h1>DATA</h1>
+            <p>${JSON.stringify(data)}</p>
+        </body>`)
 })
 
 app.get('/dashboard', (req, res) => {
@@ -29,10 +34,16 @@ app.get('/api/data', (req, res) => {
 
 app.post('/api/data', (req, res) => {
     const dataEntry = req.body
-    console.log(dataEntry)
+    data.push(dataEntry.name)
+    console.log(dataEntry.name)
     res.sendStatus(201)
 })
 
+app.delete('/api/data', (req, res) => {
+    data.pop()
+    console.log("Deleted an element from the data list")
+    res.sendStatus(204)
+})
 
 app.listen(PORT, () => {
     console.log(`Server has started on: ${PORT}`)
