@@ -24,6 +24,7 @@ function app() {
                 if (response.ok) {
                     let matchByDate = []
                     if (data.length !== 0) {
+                        data.sort((a, b) => a.date.localeCompare(b.date));
                         let searchDate = data[0].date;
                         let matchSet = [];
                         for (i = 0; i < data.length; i++) {
