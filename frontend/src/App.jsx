@@ -3,7 +3,7 @@ import axios from "axios";
 
 function app() {
 
-    const [matchData, setMatchData] = useState([]);
+    const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
 
     useEffect(() => {
@@ -11,40 +11,39 @@ function app() {
             try {
                 const response = await fetch('https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json');
 
-                const matchInfo = await response.json()
-                console.log(matchInfo)
-                const data = matchInfo.matches
-
-                let i = 1;
-                data.forEach(match => {
-                    match.id = i;
-                    i++;
-                })
-
                 if (response.ok) {
-                    let matchByDate = []
-                    if (data.length !== 0) {
-                        data.sort((a, b) => a.date.localeCompare(b.date));
-                        let searchDate = data[0].date;
-                        let matchSet = [];
-                        for (i = 0; i < data.length; i++) {
-                            if (data[i].date === searchDate) {
-                                matchSet.push(data[i]);
-                            }
-                            else {
-                                searchDate = data[i+1].date;
-                                matchByDate.push(matchSet);
-                                matchSet = [];
-                            }
+                    const matchInfo = await response.json();
+                    const data = matchInfo.matches;
+
+                    data.sort((a, b) => a.date.localeCompare(b.date));
+
+                    let i = 1;
+                    data.forEach(match => {
+                        match.id = i;
+                        i++;
+                    })
+                    
+                    let matchByDate = {};
+
+                    data.forEach((match) => {
+                        const checkDate = match.date;
+                        if (!matchByDate[checkDate]) {
+                            matchByDate[checkDate] = [match];
                         }
-                        matchByDate.push(matchSet);
-                    }
+                        else {
+                            matchByDate[checkDate].push(match);
+                        }
+                    })
+
                     setMatchData(matchByDate);
-                    setWebError("");
+
+
                 }
                 else {
                     setWebError("Unable to retrieve match data. Please try again later.");
                 }
+
+                
             } catch (error) {
                 console.log(error)
                 setWebError("Unable to retrieve match data. Please try again later.");
@@ -52,7 +51,7 @@ function app() {
         };
 
         fetchMatches();
-        console.log(matchData)
+        
     }, []);
 
     return (
@@ -63,13 +62,13 @@ function app() {
             ) : matchData.length === 0 ? (
                 <p>No matches available</p>
             ) : (
-                matchData.map((matchSet) => (
-                    <div>
-                        <h2>{matchSet[0].date}</h2>
-                        <h2>{matchSet[0].round}</h2>
+                Object.keys(matchData).map((matchSet) => (
+                    <div key={matchSet}>
+                        <h2>{matchData[matchSet][0].round}</h2>
+                        <h2>{matchSet}</h2>
                         <div>
                             
-                            {matchSet.map((match) => (
+                            {matchData[matchSet].map((match) => (
                                 <div key={match.id}>
                                     <h2>{match.id}</h2>  
                                     <p><strong>{match.team1}</strong> vs <strong>{match.team2}</strong></p>
