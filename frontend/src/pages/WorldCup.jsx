@@ -1,0 +1,83 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import FootballMatchCard from "../components/FootballMatchCard"
+
+function App() {
+
+    const [matchData, setMatchData] = useState({});
+    const [webError, setWebError] = useState("");
+
+    useEffect(() => {
+        const fetchMatches = async () => {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json');
+
+                if (response.ok) {
+                    const matchInfo = await response.json();
+                    const data = matchInfo.matches;
+
+                    data.sort((a, b) => a.date.localeCompare(b.date));
+
+                    let i = 1;
+                    data.forEach(match => {
+                        match.id = i;
+                        i++;
+                    })
+                    
+                    let matchByDate = {};
+
+                    data.forEach((match) => {
+                        const checkDate = match.date;
+                        if (!matchByDate[checkDate]) {
+                            matchByDate[checkDate] = [match];
+                        }
+                        else {
+                            matchByDate[checkDate].push(match);
+                        }
+                    })
+
+                    setMatchData(matchByDate);
+
+
+                }
+                else {
+                    setWebError("Unable to retrieve match data. Please try again later.");
+                }
+
+                
+            } catch (error) {
+                console.log(error)
+                setWebError("Unable to retrieve match data. Please try again later.");
+            }
+        };
+
+        fetchMatches();
+        
+    }, []);
+
+    return (
+        <div>
+            <h1>Matches</h1>
+            { webError !== "" ? (
+                <p>{webError}1</p>
+            ) : matchData.length === 0 ? (
+                <p>No matches available</p>
+            ) : (
+                Object.keys(matchData).map((matchSet) => (
+                    <div key={matchSet}>
+                        <h2>{matchData[matchSet][0].round}</h2>
+                        <h2>{matchSet}</h2>
+                        <div>
+                            {matchData[matchSet].map((match) => (
+                                <FootballMatchCard matchInfo={match}/>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            )}
+        </div>
+    );
+}
+
+export default App;
+

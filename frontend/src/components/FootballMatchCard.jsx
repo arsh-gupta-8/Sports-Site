@@ -20,3 +20,5 @@ function FootballCard({matchInfo}) {
         </div>
     );
 }
+
+export default FootballCard;
