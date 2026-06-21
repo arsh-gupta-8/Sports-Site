@@ -64,7 +64,12 @@ function App() {
                 <p>No matches available</p>
             ) : (
                 Object.keys(matchData).map((matchSet) => (
-                    <div key={matchSet}>
+                    <div key={matchSet} style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center", 
+                        alignItems: "center",
+                    }}>
                         <h2>{matchData[matchSet][0].round}</h2>
                         <h2>{matchSet}</h2>
                         <div>

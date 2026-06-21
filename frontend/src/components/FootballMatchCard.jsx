@@ -1,7 +1,13 @@
 function FootballCard({matchInfo}) {
     return (
-        <div className="match-card">
-            <div className="match-header">
+        <div className="match-card" style={{
+            maxWidth: 500,
+            justifyContent: "center",
+        }}>
+            <div className="match-header" style={{
+                display: "flex",
+                justifyContent: "space-between"
+            }}>
                 <p>{matchInfo.date}</p>
                 <p>{matchInfo.time}</p>
             </div>
