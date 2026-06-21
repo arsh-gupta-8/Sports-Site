@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function app() {
+function App() {
 
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
@@ -90,5 +90,5 @@ function app() {
     );
 }
 
-export default app;
+export default App;
 
