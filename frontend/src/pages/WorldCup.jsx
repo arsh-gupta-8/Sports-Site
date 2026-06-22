@@ -72,7 +72,12 @@ function App() {
                     }}>
                         <h2>{matchData[matchSet][0].round}</h2>
                         <h2>{matchSet}</h2>
-                        <div>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            width: "100%",
+                            flexWrap: "wrap",
+                        }}>
                             {matchData[matchSet].map((match) => (
                                 <FootballMatchCard matchInfo={match}/>
                             ))}

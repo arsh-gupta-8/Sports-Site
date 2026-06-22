@@ -1,8 +1,12 @@
 function FootballCard({matchInfo}) {
     return (
         <div className="match-card" style={{
-            maxWidth: 500,
+            width: "35%",
             justifyContent: "center",
+            margin: "2%",
+            border: "2px solid white",
+            borderRadius: "20px",
+            padding: "5%",
         }}>
             <div className="match-header" style={{
                 display: "flex",
