@@ -59,6 +59,7 @@ function FootballCard({matchInfo}) {
             border: "2px solid white",
             borderRadius: "20px",
             padding: "5%",
+            
         }}>
             <div className="match-header" style={{
                 display: "flex",
@@ -107,10 +108,12 @@ function FootballCard({matchInfo}) {
                     }}>
                         <p style={{
                             fontWeight: (matchInfo.score.ft[0] > matchInfo.score.ft[1] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
+                            color: (matchInfo.score.ft[0] > matchInfo.score.ft[1]) ? "green" : (matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "yellow" : "red",
                         }}>{matchInfo.score.ft[0]}</p>
                         <p>  vs  </p>
                         <p style={{
                             fontWeight: (matchInfo.score.ft[1] > matchInfo.score.ft[0] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
+                            color: (matchInfo.score.ft[1] > matchInfo.score.ft[0]) ? "green" : (matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "yellow" : "red",
                         }}>{matchInfo.score.ft[1]}</p>
                     </div>
                 ) : (
