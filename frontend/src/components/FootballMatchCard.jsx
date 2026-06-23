@@ -67,36 +67,53 @@ function FootballCard({matchInfo}) {
                 <p>{matchInfo.date}</p>
                 <p>{matchInfo.time}</p>
             </div>
-            <div className="match-teams" style={{
+            { Object.hasOwn(matchInfo, "score") && (
+                <div className="match-teams" style={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    marginTop: "5%",
+                    marginBottom: "5%",
+                }}>
+                    <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1} style={{
+                        width: "10%",
+                        height: "auto",
+                    }}></img>
+                    <p style={{
+                        width: "20%",
+                        textOverflow: "ellipsis",
+                        overflow: "hidden",
+                        fontWeight: (Object.hasOwn(matchInfo, "score") && (matchInfo.score.ft[0] > matchInfo.score.ft[1] || matchInfo.score.ft[0] === matchInfo.score.ft[1])) ? "bold" : "normal",
+                    }}>{matchInfo.team1}</p>
+                    <p>vs</p>
+                    <p style={{
+                        width: "20%",
+                        textOverflow: "ellipsis",
+                        fontWeight: (Object.hasOwn(matchInfo, "score") && (matchInfo.score.ft[1] > matchInfo.score.ft[0] || matchInfo.score.ft[0] === matchInfo.score.ft[1])) ? "bold" : "normal",
+                    }}>{matchInfo.team2}</p>
+                    <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2} style={{
+                        width: "10%",
+                        height: "auto",
+                    }}></img>
+                </div>
+            ) }
+            <div className="match-score" style={{  
                 display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                marginTop: "5%",
-                marginBottom: "5%",
+                justifyContent: "center"
             }}>
-                <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1} style={{
-                    width: "10%",
-                    height: "auto",
-                }}></img>
-                <p style={{
-                    width: "20%",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                }}>{matchInfo.team1}</p>
-                <p>vs</p>
-                <p style={{
-                    width: "20%",
-                    textOverflow: "ellipsis",
-                }}>{matchInfo.team2}</p>
-                <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2} style={{
-                    width: "10%",
-                    height: "auto",
-                }}></img>
-            </div>
-            <div className="match-score">
-                { Object.hasOwn(matchInfo, "score") == true ? (
-                    <div>
-                        <p>{matchInfo.score.ft[0]} - {matchInfo.score.ft[1]}</p>
+                { Object.hasOwn(matchInfo, "score") ? (
+                    <div style={{
+                        width: "40%",
+                        display: "flex",
+                        justifyContent: "space-evenly"
+                    }}>
+                        <p style={{
+                            fontWeight: (matchInfo.score.ft[0] > matchInfo.score.ft[1] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
+                        }}>{matchInfo.score.ft[0]}</p>
+                        <p>  vs  </p>
+                        <p style={{
+                            fontWeight: (matchInfo.score.ft[1] > matchInfo.score.ft[0] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
+                        }}>{matchInfo.score.ft[1]}</p>
                     </div>
                 ) : (
                     <p>TBD</p>
