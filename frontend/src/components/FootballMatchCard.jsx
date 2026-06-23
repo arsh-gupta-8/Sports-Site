@@ -67,10 +67,31 @@ function FootballCard({matchInfo}) {
                 <p>{matchInfo.date}</p>
                 <p>{matchInfo.time}</p>
             </div>
-            <div className="match-teams">
-                <p>{matchInfo.team1} vs {matchInfo.team2}</p>
-                <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1}></img>
-                <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2}></img>
+            <div className="match-teams" style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                marginTop: "5%",
+                marginBottom: "5%",
+            }}>
+                <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1} style={{
+                    width: "10%",
+                    height: "auto",
+                }}></img>
+                <p style={{
+                    width: "20%",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                }}>{matchInfo.team1}</p>
+                <p>vs</p>
+                <p style={{
+                    width: "20%",
+                    textOverflow: "ellipsis",
+                }}>{matchInfo.team2}</p>
+                <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2} style={{
+                    width: "10%",
+                    height: "auto",
+                }}></img>
             </div>
             <div className="match-score">
                 { Object.hasOwn(matchInfo, "score") == true ? (
