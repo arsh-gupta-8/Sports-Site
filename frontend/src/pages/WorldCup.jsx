@@ -16,6 +16,11 @@ function WorldCup() {
                     const matchInfo = await response.json();
                     const data = matchInfo.matches;
 
+                    data.forEach(match => {
+                        const combTime = match.date + "T" + match.time.split(" ")[0] + ":00-0" + match.time.split(" ")[1][-1] + ":00";
+                        match.timeFormat = combTime;
+                    })
+
                     data.sort((a, b) => a.date.localeCompare(b.date));
 
                     let i = 1;
