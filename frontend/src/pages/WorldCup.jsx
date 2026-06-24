@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FootballMatchCard from "../components/FootballMatchCard"
 
-function App() {
+function WorldCup() {
 
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
@@ -89,5 +89,5 @@ function App() {
     );
 }
 
-export default App;
+export default WorldCup;
 
