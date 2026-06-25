@@ -17,8 +17,15 @@ function WorldCup() {
                     const data = matchInfo.matches;
 
                     data.forEach(match => {
-                        const combTime = match.date + "T" + match.time.split(" ")[0] + ":00-0" + match.time.split(" ")[1][-1] + ":00";
+                        const combTime = match.date + "T" + match.time.split(" ")[0] + ":00-0" + match.time.split(" ")[1].at(-1) + ":00";
+                        const dateObj = new Date(combTime);
                         match.timeFormat = combTime;
+                        const userLocalTime = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        const userLocalDate = dateObj.toLocaleDateString([], { day: 'numeric', month: 'short' });
+                        
+                        match.localTime = userLocalTime;
+                        match.localDate = userLocalDate;
+                        
                     })
 
                     data.sort((a, b) => a.date.localeCompare(b.date));
@@ -84,7 +91,7 @@ function WorldCup() {
                             flexWrap: "wrap",
                         }}>
                             {matchData[matchSet].map((match) => (
-                                <FootballMatchCard matchInfo={match}/>
+                                <FootballMatchCard key={match.id} matchInfo={match}/>
                             ))}
                         </div>
                     </div>

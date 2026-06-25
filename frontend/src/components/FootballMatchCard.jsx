@@ -65,8 +65,8 @@ function FootballCard({matchInfo}) {
                 display: "flex",
                 justifyContent: "space-between"
             }}>
-                <p>{matchInfo.date}</p>
-                <p>{matchInfo.time}</p>
+                <p>{matchInfo.localDate.split(',')[0]}</p>
+                <p>{matchInfo.localTime}</p>
             </div>
             <div className="match-teams" style={{
                 display: "flex",
