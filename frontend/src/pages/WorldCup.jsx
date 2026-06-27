@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import FootballMatchCard from "../components/FootballMatchCard"
 import { getItem } from "../utils/localStorage";
+import { updateState } from "../hooks/persistedState";
 
 function WorldCup() {
 
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
-    const [currency, setCurrency] = useState(() => {
-        const item = getItem("Currency");
-        return item || 1000;
-    });
+    const [currency, setCurrency] = updateState('currency', 1000);
 
     useEffect(() => {
         const fetchMatches = async () => {
@@ -80,6 +78,7 @@ function WorldCup() {
         <div>
             <h1>Matches</h1>
             <p>You have {currency} coins</p>
+            <button onClick={() => {setCurrency(currency + 1)}}> Add currency </button>
             { webError !== "" ? (
                 <p>{webError}1</p>
             ) : matchData.length === 0 ? (
