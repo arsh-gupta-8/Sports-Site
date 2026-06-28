@@ -32,7 +32,7 @@ function WorldCup() {
                         match.compDate = compDate;
                         match.localTime = userLocalTime;
                         match.localDate = userLocalDate;
-                        
+                        match.dateObj = dateObj;
                     })
 
                     data.sort((a, b) => a.compDate.localeCompare(b.compDate));

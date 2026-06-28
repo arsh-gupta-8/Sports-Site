@@ -1,4 +1,6 @@
 
+import { useState } from "react";
+
 const worldCupCountryFlags = {
     "Algeria": "https://flagcdn.com/w320/dz.png",
     "Argentina": "https://flagcdn.com/w320/ar.png",
@@ -51,6 +53,14 @@ const worldCupCountryFlags = {
 };
 
 function FootballCard({matchInfo}) {
+
+    const [score1, setScore1] = useState(0);
+    const [score2, setScore2] = useState(0);
+
+    function currentTime() {
+        return new Date().getTime();
+    }
+
     return (
         <div className="match-card" style={{
             width: "35%",
@@ -100,7 +110,7 @@ function FootballCard({matchInfo}) {
                 display: "flex",
                 justifyContent: "center"
             }}>
-                { Object.hasOwn(matchInfo, "score") ? (
+                { Object.hasOwn(matchInfo, "score") && Object.hasOwn(matchInfo["score"], "ft") ? (
                     <div style={{
                         width: "40%",
                         display: "flex",
@@ -115,6 +125,25 @@ function FootballCard({matchInfo}) {
                             fontWeight: (matchInfo.score.ft[1] > matchInfo.score.ft[0] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
                             color: (matchInfo.score.ft[1] > matchInfo.score.ft[0]) ? "green" : (matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "yellow" : "red",
                         }}>{matchInfo.score.ft[1]}</p>
+                    </div>
+                ) : matchInfo.dateObj.getTime() > currentTime() ? (
+                    <div>
+                        <div>
+                            <div>
+                                <button onClick={() => {setScore1(score1 - 1)}}>-</button>
+                                <p>{score1}</p>
+                                <button onClick={() => {setScore1(score1 + 1)}}>+</button>
+                            </div>
+                            <div>
+                                <form inputMode="number">
+
+                                </form>
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <button>Predict</button>
                     </div>
                 ) : (
                     <p>TBD</p>
