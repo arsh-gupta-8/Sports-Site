@@ -56,6 +56,7 @@ function FootballCard({matchInfo}) {
 
     const [score1, setScore1] = useState(0);
     const [score2, setScore2] = useState(0);
+    const [amount, setAmount] = useState("");
 
     function currentTime() {
         return new Date().getTime();
@@ -137,20 +138,20 @@ function FootballCard({matchInfo}) {
                                 display: "flex",
                                 gap: "10px",
                             }}>
-                                <button onClick={() => {setScore1(score1 - 1)}}>-</button>
+                                <button onClick={() => { if (score1 > 0) setScore1(score1 - 1)}}>-</button>
                                 <p>{score1}</p>
                                 <button onClick={() => {setScore1(score1 + 1)}}>+</button>
                             </div>
                             <div>
                                 <form>
-                                    <input type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }}></input>
+                                    <input type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}}></input>
                                 </form>
                             </div>
                             <div style={{
                                 display: "flex",
                                 gap: "10px",
                             }}>
-                                <button onClick={() => {setScore2(score2 - 1)}}>-</button>
+                                <button onClick={() => { if (score2 > 0) setScore2(score2 - 1)}}>-</button>
                                 <p>{score2}</p>
                                 <button onClick={() => {setScore2(score2 + 1)}}>+</button>
                             </div>
@@ -158,7 +159,7 @@ function FootballCard({matchInfo}) {
                         <button style={{ marginTop: "20px" }} >Predict</button>
                     </div>
                 ) : (
-                    <p>TBD</p>
+                    <p>Match Ongoing</p>
                 )}
             </div>
         </div>
