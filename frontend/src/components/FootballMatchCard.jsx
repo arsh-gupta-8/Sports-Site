@@ -128,22 +128,34 @@ function FootballCard({matchInfo}) {
                     </div>
                 ) : matchInfo.dateObj.getTime() > currentTime() ? (
                     <div>
-                        <div>
-                            <div>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            gap: "10px"
+                        }}>
+                            <div style={{
+                                display: "flex",
+                                gap: "10px",
+                            }}>
                                 <button onClick={() => {setScore1(score1 - 1)}}>-</button>
                                 <p>{score1}</p>
                                 <button onClick={() => {setScore1(score1 + 1)}}>+</button>
                             </div>
                             <div>
-                                <form inputMode="number">
-
+                                <form>
+                                    <input type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }}></input>
                                 </form>
                             </div>
-                            <div>
-                                
+                            <div style={{
+                                display: "flex",
+                                gap: "10px",
+                            }}>
+                                <button onClick={() => {setScore2(score2 - 1)}}>-</button>
+                                <p>{score2}</p>
+                                <button onClick={() => {setScore2(score2 + 1)}}>+</button>
                             </div>
                         </div>
-                        <button>Predict</button>
+                        <button style={{ marginTop: "20px" }} >Predict</button>
                     </div>
                 ) : (
                     <p>TBD</p>
