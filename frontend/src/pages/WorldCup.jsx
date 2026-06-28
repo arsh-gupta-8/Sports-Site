@@ -3,12 +3,15 @@ import axios from "axios";
 import FootballMatchCard from "../components/FootballMatchCard"
 import { getItem } from "../utils/localStorage";
 import { updateState } from "../hooks/persistedState";
+import { useContext } from "react";
+import { userData } from "../context/UserDataContext";
+
+const { currency, setCurrency, predictions, setPredictions } = useContext(userData);
 
 function WorldCup() {
 
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
-    const [currency, setCurrency] = updateState('currency', 1000);
 
     useEffect(() => {
         const fetchMatches = async () => {
@@ -26,9 +29,7 @@ function WorldCup() {
                         const userLocalTime = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                         const userLocalDate = dateObj.toLocaleDateString([], { day: 'numeric', month: 'short' });
                         const compDate = dateObj.toLocaleDateString("en-US", { day: '2-digit', month: '2-digit' }) + userLocalTime;
-                        // console.log(compDate)
-                        // console.log(userLocalTime)
-                        // console.log(userLocalDate)
+
                         match.compDate = compDate;
                         match.localTime = userLocalTime;
                         match.localDate = userLocalDate;
