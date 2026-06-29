@@ -1,0 +1,54 @@
+.match-card {
+    width: 35%;
+    justify-content: center;
+    margin: 2%;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 5%;
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.match-teams {
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.match-score {
+    display: flex;
+    justify-content: center;
+}
+
+.team-name {
+    width: 30%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.flag {
+    width: 10%;
+    height: auto;
+}
+
+.score-display {
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.prediction-bar {
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+}
+
+.prediction-score-buttons {
+    display: flex;
+    gap: 10px;
+}

@@ -1,6 +1,7 @@
 
 import { useContext, useState } from "react";
 import { userData } from "../context/UserDataContext";
+import "../css/FootballMatchCard.css";
 
 const worldCupCountryFlags = {
     "Algeria": "https://flagcdn.com/w320/dz.png",
@@ -74,60 +75,25 @@ function FootballCard({matchInfo}) {
     }
 
     return (
-        <div className="match-card" style={{
-            width: "35%",
-            justifyContent: "center",
-            margin: "2%",
-            border: "2px solid white",
-            borderRadius: "20px",
-            padding: "5%",
-            
-        }}>
-            <div className="match-header" style={{
-                display: "flex",
-                justifyContent: "space-between"
-            }}>
+        <div className="match-card">
+            <div className="match-header">
                 <p>{matchInfo.localDate.split(',')[0]}</p>
                 <p>{matchInfo.localTime}</p>
             </div>
-            <div className="match-teams" style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                marginTop: "5%",
-                marginBottom: "5%",
-            }}>
-                <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1} style={{
-                    width: "10%",
-                    height: "auto",
-                }}></img>
-                <p style={{
-                    width: "20%",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
+            <div className="match-teams">
+                <img src={worldCupCountryFlags[matchInfo.team1]} alt={matchInfo.team1} className="flag"></img>
+                <p className="team-name" style={{
                     fontWeight: (Object.hasOwn(matchInfo, "score") && (matchInfo.score.ft[0] > matchInfo.score.ft[1] || matchInfo.score.ft[0] === matchInfo.score.ft[1])) ? "bold" : "normal",
                 }}>{matchInfo.team1}</p>
                 <p>vs</p>
-                <p style={{
-                    width: "20%",
-                    textOverflow: "ellipsis",
+                <p className="team-name" style={{
                     fontWeight: (Object.hasOwn(matchInfo, "score") && (matchInfo.score.ft[1] > matchInfo.score.ft[0] || matchInfo.score.ft[0] === matchInfo.score.ft[1])) ? "bold" : "normal",
                 }}>{matchInfo.team2}</p>
-                <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2} style={{
-                    width: "10%",
-                    height: "auto",
-                }}></img>
+                <img src={worldCupCountryFlags[matchInfo.team2]} alt={matchInfo.team2} className="flag"></img>
             </div>
-            <div className="match-score" style={{  
-                display: "flex",
-                justifyContent: "center"
-            }}>
+            <div className="match-score">
                 { Object.hasOwn(matchInfo, "score") && Object.hasOwn(matchInfo["score"], "ft") ? (
-                    <div style={{
-                        width: "40%",
-                        display: "flex",
-                        justifyContent: "space-evenly"
-                    }}>
+                    <div className="score-display">
                         <p style={{
                             fontWeight: (matchInfo.score.ft[0] > matchInfo.score.ft[1] || matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "bold" : "normal",
                             color: (matchInfo.score.ft[0] > matchInfo.score.ft[1]) ? "green" : (matchInfo.score.ft[0] === matchInfo.score.ft[1]) ? "yellow" : "red",
@@ -140,15 +106,8 @@ function FootballCard({matchInfo}) {
                     </div>
                 ) : matchInfo.dateObj.getTime() > currentTime() ? (
                     <div>
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "space-evenly",
-                            gap: "10px"
-                        }}>
-                            <div style={{
-                                display: "flex",
-                                gap: "10px",
-                            }}>
+                        <div className="prediction-bar">
+                            <div className="prediction-score-buttons">
                                 <button onClick={() => { if (score1 > 0) setScore1(score1 - 1)}}>-</button>
                                 <p>{score1}</p>
                                 <button onClick={() => {setScore1(score1 + 1)}}>+</button>
@@ -158,10 +117,7 @@ function FootballCard({matchInfo}) {
                                     <input type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}}></input>
                                 </form>
                             </div>
-                            <div style={{
-                                display: "flex",
-                                gap: "10px",
-                            }}>
+                            <div className="prediction-score-buttons">
                                 <button onClick={() => { if (score2 > 0) setScore2(score2 - 1)}}>-</button>
                                 <p>{score2}</p>
                                 <button onClick={() => {setScore2(score2 + 1)}}>+</button>
