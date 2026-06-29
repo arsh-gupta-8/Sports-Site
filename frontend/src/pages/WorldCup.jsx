@@ -6,9 +6,9 @@ import { updateState } from "../hooks/persistedState";
 import { useContext } from "react";
 import { userData } from "../context/UserDataContext";
 
-const { currency, setCurrency, predictions, setPredictions } = useContext(userData);
-
 function WorldCup() {
+
+    const { currency, setCurrency, predictions, setPredictions } = useContext(userData);
 
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
@@ -57,7 +57,6 @@ function WorldCup() {
                     })
 
                     setMatchData(matchByDate);
-
 
                 }
                 else {

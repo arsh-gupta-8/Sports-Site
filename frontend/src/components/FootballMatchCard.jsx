@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { userData } from "../context/UserDataContext";
 
 const worldCupCountryFlags = {
     "Algeria": "https://flagcdn.com/w320/dz.png",
@@ -54,12 +55,20 @@ const worldCupCountryFlags = {
 
 function FootballCard({matchInfo}) {
 
+    const { currency, setCurrency, predictions, setPredictions } = useContext(userData);
+
     const [score1, setScore1] = useState(0);
     const [score2, setScore2] = useState(0);
     const [amount, setAmount] = useState("");
 
     function currentTime() {
         return new Date().getTime();
+    }
+
+    function storePrediction() {
+        predictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount }
+        console.log(predictions)
+
     }
 
     return (
@@ -156,7 +165,7 @@ function FootballCard({matchInfo}) {
                                 <button onClick={() => {setScore2(score2 + 1)}}>+</button>
                             </div>
                         </div>
-                        <button style={{ marginTop: "20px" }} >Predict</button>
+                        <button style={{ marginTop: "20px" }} onClick={() => { if (amount > 0) storePrediction() }} >Predict</button>
                     </div>
                 ) : (
                     <p>Match Ongoing</p>

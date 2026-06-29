@@ -6,7 +6,7 @@ export const userData = createContext(null);
 function UserDataProvider({ children }) {
     
     const [currency, setCurrency] = updateState('currency', 1000);
-    const [predictions, setPredictions] = updateState('predictions', {});
+    const [predictions, setPredictions] = updateState('predictions', {"WC" : {}, "Other" : {}});
     
     return (
         <userData.Provider value={{ currency, setCurrency, predictions, setPredictions }}>
@@ -16,3 +16,4 @@ function UserDataProvider({ children }) {
 
 }
 
+export default UserDataProvider;
