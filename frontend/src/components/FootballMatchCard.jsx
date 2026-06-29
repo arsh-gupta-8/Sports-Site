@@ -66,8 +66,10 @@ function FootballCard({matchInfo}) {
     }
 
     function storePrediction() {
-        predictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount }
-        console.log(predictions)
+        const updatedPredictions = { ...predictions };
+        updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount };
+        setPredictions(updatedPredictions);
+        console.log(predictions);
 
     }
 

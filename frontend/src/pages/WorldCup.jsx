@@ -13,6 +13,7 @@ function WorldCup() {
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
 
+
     useEffect(() => {
         const fetchMatches = async () => {
             try {
@@ -70,8 +71,8 @@ function WorldCup() {
             }
         };
 
-        fetchMatches();
-        
+        fetchMatches();        
+
     }, []);
 
     return (
