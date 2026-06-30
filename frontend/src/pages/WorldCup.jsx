@@ -92,7 +92,7 @@ function WorldCup() {
                         justifyContent: "center", 
                         alignItems: "center",
                     }}>
-                        <h2>{matchData[matchSet][0].round}</h2>
+                        <h2 style={{ marginTop: "50px" }}>{matchData[matchSet][0].round}</h2>
                         <h2>{matchSet}</h2>
                         <div style={{
                             display: "flex",
