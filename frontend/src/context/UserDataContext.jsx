@@ -48,22 +48,27 @@ function UserDataProvider({ children }) {
                         
                         if (Object.hasOwn(data[i], "score")) {
                             let multiplier = 0;
-                            let score1 = data[i].score.ft[0];
-                            let score2 = data[i].score.ft[1];
-                            if (Object.hasOwn(data[i].score, "et")) {
-                                score1 += data[i].score.et[0];
-                                score2 += data[i].score.et[1];
+                            let score1 = data[i+1].score.ft[0];
+                            let score2 = data[i+1].score.ft[1];
+                            if (Object.hasOwn(data[i+1].score, "et")) {
+                                score1 += data[i+1].score.et[0];
+                                score2 += data[i+1].score.et[1];
                             }
-                            if (Object.hasOwn(data[i].score, "p")) {
-                                score1 += data[i].score.p[0];
-                                score2 += data[i].score.p[1];
+                            if (Object.hasOwn(data[i+1].score, "p")) {
+                                score1 += data[i+1].score.p[0];
+                                score2 += data[i+1].score.p[1];
                             }
-
                             const winner = score1 > score2 ? 1 : score2 > score1 ? 2 :  0;
+                            console.log(data)
+                            console.log(checkID)
+                            console.log(data[i].team1)
+                            console.log(score1, score2, winner)
                             console.log(predictions["WC"][checkID])
                             if ( winner === predictions["WC"][checkID].winner ) {
                                 multiplier += 2
                             }
+
+
                             if ( score1 === predictions["WC"][checkID].score1 ) {
                                 multiplier += 1
                             }
@@ -71,6 +76,7 @@ function UserDataProvider({ children }) {
                                 multiplier += 1
                             }
 
+                            console.log(multiplier)
                             setCurrency(currency + predictions["WC"][checkID].amount * multiplier)
                         }
                     } 
