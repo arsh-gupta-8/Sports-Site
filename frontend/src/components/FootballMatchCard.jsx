@@ -67,10 +67,11 @@ function FootballCard({matchInfo}) {
     }
 
     function storePrediction() {
-        if (currency >= amount && matchInfo.dateObj.getTime() > currentTime()) {
-            setCurrency(currency - amount)
+        const newAmount = Number(amount)
+        if (currency >= newAmount && matchInfo.dateObj.getTime() > currentTime()) {
+            setCurrency(currency - newAmount)
             const updatedPredictions = { ...predictions };
-            updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount };
+            updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : newAmount };
             setPredictions(updatedPredictions);
             console.log(predictions);
         }
@@ -78,6 +79,7 @@ function FootballCard({matchInfo}) {
 
     function deletePrediction() {
         const updatedPredictions = { ...predictions };
+        setCurrency(currency + updatedPredictions["WC"][matchInfo.id].amount)
         delete updatedPredictions["WC"][matchInfo.id];
         setPredictions(updatedPredictions);
     }

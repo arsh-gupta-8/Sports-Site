@@ -80,6 +80,23 @@ function WorldCup() {
             <h1>Matches</h1>
             <p>You have {currency} coins</p>
             <button onClick={() => {setCurrency(currency + 1)}}> Add currency </button>
+            <div style={{
+                width: "90%",
+                borderColor: "white",
+                border: "2px solid white",
+                borderRadius: "20px",
+                display: "flex",
+                flexDirection: "column"
+            }}>
+                <h3>Prediction Rules</h3>
+                <ul>
+                    <li> +200% return if win/draw decided correctly</li>
+                    <li> Win by penalties don't count as a draw</li>
+                    <li> +100% return for each team score chosen correctly</li>
+                    <li> penalties are included in final score prediction</li>
+                    <li> You cannot make predictions after a match starts</li>
+                </ul>
+            </div>
             { webError !== "" ? (
                 <p>{webError}1</p>
             ) : matchData.length === 0 ? (
