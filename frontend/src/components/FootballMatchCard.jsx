@@ -67,13 +67,19 @@ function FootballCard({matchInfo}) {
     }
 
     function storePrediction() {
-        if (amount >= currency) {
+        if (currency >= amount && matchInfo.dateObj.getTime() > currentTime()) {
             setCurrency(currency - amount)
             const updatedPredictions = { ...predictions };
             updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount };
             setPredictions(updatedPredictions);
             console.log(predictions);
         }
+    }
+
+    function deletePrediction() {
+        const updatedPredictions = { ...predictions };
+        delete updatedPredictions["WC"][matchInfo.id];
+        setPredictions(updatedPredictions);
     }
 
     return (
@@ -108,24 +114,33 @@ function FootballCard({matchInfo}) {
                     </div>
                 ) : matchInfo.dateObj.getTime() > currentTime() ? (
                     <div>
-                        <div className="prediction-bar">
-                            <div className="prediction-score-buttons">
-                                <button onClick={() => { if (score1 > 0) setScore1(score1 - 1)}}>-</button>
-                                <p>{score1}</p>
-                                <button onClick={() => {setScore1(score1 + 1)}}>+</button>
-                            </div>
+                        { Object.hasOwn(predictions["WC"], matchInfo.id) ? (
                             <div>
-                                <form>
-                                    <input type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}}></input>
-                                </form>
+                                <button onClick={() => {deletePrediction()}}>Delete Prediction</button>
                             </div>
-                            <div className="prediction-score-buttons">
-                                <button onClick={() => { if (score2 > 0) setScore2(score2 - 1)}}>-</button>
-                                <p>{score2}</p>
-                                <button onClick={() => {setScore2(score2 + 1)}}>+</button>
+                        ) : (
+                            <div>
+                                <div className="prediction-bar">
+                                    <div className="prediction-score-buttons">
+                                        <button onClick={() => { if (score1 > 0) setScore1(score1 - 1)}}>-</button>
+                                        <p id="pScore1">{score1}</p>
+                                        <button onClick={() => {setScore1(score1 + 1)}}>+</button>
+                                    </div>
+                                    <div>
+                                        <form>
+                                            <input id="pAmount" type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}}></input>
+                                        </form>
+                                    </div>
+                                    <div className="prediction-score-buttons">
+                                        <button onClick={() => { if (score2 > 0) setScore2(score2 - 1)}}>-</button>
+                                        <p id="pScore2">{score2}</p>
+                                        <button onClick={() => {setScore2(score2 + 1)}}>+</button>
+                                    </div>
+                                </div>
+                                <button style={{ marginTop: "20px" }} onClick={() => { if (amount > 0) storePrediction() }} >Predict</button>
                             </div>
-                        </div>
-                        <button style={{ marginTop: "20px" }} onClick={() => { if (amount > 0) storePrediction() }} >Predict</button>
+                        )}
+                        
                     </div>
                 ) : (
                     <p>Match Ongoing - cannot place any bets</p>
