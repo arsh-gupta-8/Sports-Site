@@ -67,11 +67,13 @@ function FootballCard({matchInfo}) {
     }
 
     function storePrediction() {
-        const updatedPredictions = { ...predictions };
-        updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount };
-        setPredictions(updatedPredictions);
-        console.log(predictions);
-
+        if (amount >= currency) {
+            setCurrency(currency - amount)
+            const updatedPredictions = { ...predictions };
+            updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : amount };
+            setPredictions(updatedPredictions);
+            console.log(predictions);
+        }
     }
 
     return (
@@ -126,7 +128,7 @@ function FootballCard({matchInfo}) {
                         <button style={{ marginTop: "20px" }} onClick={() => { if (amount > 0) storePrediction() }} >Predict</button>
                     </div>
                 ) : (
-                    <p>Match Ongoing</p>
+                    <p>Match Ongoing - cannot place any bets</p>
                 )}
             </div>
         </div>
