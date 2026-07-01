@@ -131,7 +131,12 @@ function FootballCard({matchInfo}) {
                                     </div>
                                     <div>
                                         <form>
-                                            <input id="pAmount" type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}}></input>
+                                            <input id="pAmount" step="1" min="1" type="number" id="amount" placeholder="AMOUNT" style={{ width: "40%", }} onChange={(event) => {setAmount(event.target.value)}} 
+                                            onKeyDown={(event) => {
+                                            if (event.key === '.' || event.key === ',' || event.key === 'e' || event.key === '-') {
+                                                event.preventDefault();
+                                            }}}>
+                                            </input>
                                         </form>
                                     </div>
                                     <div className="prediction-score-buttons">
