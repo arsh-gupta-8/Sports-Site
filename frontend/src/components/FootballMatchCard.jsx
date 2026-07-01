@@ -71,7 +71,8 @@ function FootballCard({matchInfo}) {
         if (currency >= newAmount && matchInfo.dateObj.getTime() > currentTime()) {
             setCurrency(currency - newAmount)
             const updatedPredictions = { ...predictions };
-            updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : newAmount };
+            const winner = score1 > score2 ? 1 : score2 > score1 ? 2 : 0; 
+            updatedPredictions["WC"][matchInfo.id] = {"score1" : score1, "score2" : score2, "amount" : newAmount, "winner" : winner };
             setPredictions(updatedPredictions);
             console.log(predictions);
         }
