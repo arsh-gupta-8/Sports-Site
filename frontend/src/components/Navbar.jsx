@@ -11,18 +11,19 @@ function Navbar() {
             color: "blue",
             display: "flex",
             justifyContent: "space-around",
-            backgroundColor: "#464646"
+            backgroundColor: "rgba(255, 255, 255, 0.05)"
         }}>
             <div className="Logo">
-                <p style={{ textDecoration: "none", color: "#49a6f1", padding: "10px", fontWeight: "bold"}}>Sporta</p>
+                <p style={{ textDecoration: "none", color: "#4682B4", padding: "20px", fontWeight: "bold", fontSize: "1.5rem"}}>SportPredictor</p>
             </div>
             <div className="Tabs" style={{
                 display: "flex",
-                gap: "30px"
+                gap: "30px",
+                alignItems: "center"
             }}>
-                <Link to="/" style={{ textDecoration: "none", color: "#9bc3f1", padding: "10px" }}>Home</Link>
-                <Link to="/WorldCup" style={{ textDecoration: "none", color: "#9bc3f1", padding: "10px" }}>World Cup</Link>
-                <p style={{ textDecoration: "none", color: "#9bc3f1", padding: "10px" }}>Wallet: {currency}</p>
+                <Link to="/" style={{ textDecoration: "none", color: "#4682B4", padding: "10px" }}>Home</Link>
+                <Link to="/WorldCup" style={{ textDecoration: "none", color: "#4682B4", padding: "10px" }}>World Cup</Link>
+                <p style={{ textDecoration: "none", color: "#cacaca", padding: "10px" }}>Wallet: {currency}</p>
             </div>
         </nav>
     );

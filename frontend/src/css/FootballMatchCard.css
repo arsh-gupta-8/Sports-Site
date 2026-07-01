@@ -2,9 +2,10 @@
     width: 35%;
     justify-content: center;
     margin: 2%;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 5%;
+    color: #e0e0e0;
 }
 
 .match-header {
