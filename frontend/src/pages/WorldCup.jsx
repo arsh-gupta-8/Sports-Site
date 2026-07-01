@@ -9,7 +9,7 @@ import { userData } from "../context/UserDataContext";
 function WorldCup() {
 
     const { currency, setCurrency, predictions, setPredictions } = useContext(userData);
-    console.log(predictions);
+
     const [matchData, setMatchData] = useState({});
     const [webError, setWebError] = useState("");
 
@@ -44,8 +44,6 @@ function WorldCup() {
                         match.id = i;
                         i++;
                     })
-
-                    // console.log(data)
                     
                     let matchByDate = {};
 
@@ -87,9 +85,6 @@ function WorldCup() {
     return (
         <div>
             <h1>Matches</h1>
-            <p>You have {currency} coins</p>
-            <button onClick={() => {setCurrency(currency + 1)}}> Add currency </button>
-            <button onClick={() => {testPrediction()}}> Test Prediction </button>
             <div style={{
                 width: "90%",
                 borderColor: "white",

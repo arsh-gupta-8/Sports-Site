@@ -59,11 +59,6 @@ function UserDataProvider({ children }) {
                                 score2 += data[i+1].score.p[1];
                             }
                             const winner = score1 > score2 ? 1 : score2 > score1 ? 2 :  0;
-                            console.log(data)
-                            console.log(checkID)
-                            console.log(data[i].team1)
-                            console.log(score1, score2, winner)
-                            console.log(predictions["WC"][checkID])
                             if ( winner === predictions["WC"][checkID].winner ) {
                                 multiplier += 2
                             }
@@ -76,8 +71,11 @@ function UserDataProvider({ children }) {
                                 multiplier += 1
                             }
 
-                            console.log(multiplier)
                             setCurrency(currency + predictions["WC"][checkID].amount * multiplier)
+
+                            const updatedPredictions = { ...predictions };
+                            delete updatedPredictions["WC"][checkID];
+                            setPredictions(updatedPredictions);
                         }
                     } 
                 }
